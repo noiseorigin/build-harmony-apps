@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkTS Runtime Fix"
+  short_description: "Parse and fix ArkTS runtime crashes"
+  default_prompt: "Use $arkts-runtime-fix to diagnose this HarmonyOS runtime crash."

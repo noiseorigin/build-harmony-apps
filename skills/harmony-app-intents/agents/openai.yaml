@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony App Intents"
+  short_description: "Expose app actions through HarmonyOS Intents Kit"
+  default_prompt: "Use $harmony-app-intents to expose this app action to HarmonyOS system surfaces."

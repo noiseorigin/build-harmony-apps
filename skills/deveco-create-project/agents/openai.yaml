@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevEco Create Project"
+  short_description: "Create a version-aware HarmonyOS project safely"
+  default_prompt: "Use $deveco-create-project to scaffold a HarmonyOS application project."

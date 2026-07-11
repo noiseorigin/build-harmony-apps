@@ -1,0 +1,41 @@
+{
+  "name": "build-harmony-apps",
+  "version": "0.1.0",
+  "description": "Build HarmonyOS apps with DevEco CodeGenie, ArkTS and ArkUI workflows for debugging, preview, profiling, memory, intents, multi-device UI, testing, and refactoring.",
+  "author": {
+    "name": "Build Harmony Apps Contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "harmonyos",
+    "arkts",
+    "arkui",
+    "deveco-studio",
+    "codegenie",
+    "hvigor",
+    "hdc",
+    "debugging",
+    "profiling"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Build Harmony Apps",
+    "shortDescription": "Build, refine, profile, test, and debug HarmonyOS apps with ArkTS, ArkUI, and DevEco workflows",
+    "longDescription": "Use Build Harmony Apps to create projects, build and run apps, inspect and automate device UI, diagnose ArkTS compiler and runtime failures, preview multi-device layouts, implement native ArkUI patterns, expose Intents Kit actions, triage tests, analyze DevEco Profiler traces, and prove memory fixes with before/after evidence.",
+    "developerName": "Build Harmony Apps Contributors",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Build or debug this HarmonyOS app with ArkTS, ArkUI, and DevEco tools."
+    ],
+    "brandColor": "#0A7CFF",
+    "composerIcon": "./assets/build-harmony-apps.svg",
+    "logo": "./assets/build-harmony-apps.svg",
+    "screenshots": []
+  }
+}

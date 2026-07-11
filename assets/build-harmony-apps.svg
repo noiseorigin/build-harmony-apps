@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Build Harmony Apps</title>
+  <desc id="desc">A blue rounded square containing connected Harmony rings and a code bracket.</desc>
+  <defs>
+    <linearGradient id="bg" x1="72" y1="40" x2="444" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17B8FF"/>
+      <stop offset="1" stop-color="#3157F5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="206" cy="206" r="105" fill="none" stroke="#fff" stroke-width="34" opacity=".96"/>
+  <circle cx="306" cy="306" r="105" fill="none" stroke="#fff" stroke-width="34" opacity=".78"/>
+  <path d="M196 185l-52 71 52 71M316 185l52 71-52 71" fill="none" stroke="#081B55" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M279 166l-46 180" fill="none" stroke="#081B55" stroke-width="24" stroke-linecap="round"/>
+</svg>

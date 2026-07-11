@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-07-10",
+  "sources": [
+    {
+      "name": "OpenAI Build iOS Apps",
+      "url": "https://github.com/openai/plugins",
+      "version": "0.1.2",
+      "license": "MIT",
+      "mode": "workflow-adaptation",
+      "notes": "Task-oriented layout and evidence-gated workflows; no Apple-specific code or assets vendored."
+    },
+    {
+      "name": "DevEco CodeGenie skills",
+      "url": "https://gitcode.com/southbridge/codegenie_cli",
+      "commit": "2a9a5193c122798a451520cf6a4a5a0553e62f93",
+      "license": "MIT with Apache-2.0 notices on individual runtime scripts",
+      "mode": "fixed-snapshot-adaptation",
+      "paths": [
+        "packages/opencode/resources/skills/deveco-create-project",
+        "packages/opencode/resources/skills/arkts-grammar-standards",
+        "packages/opencode/resources/skills/arkts-error-fixes",
+        "packages/opencode/resources/skills/arkts-runtime-fix"
+      ],
+      "notes": "Concepts and source-separation rules adapted. CodeGenie-only tools were replaced by Codex MCP and portable scripts. API 17-22 scaffolding was not copied into this API 26-aware plugin."
+    },
+    {
+      "name": "HarmonyOS Intents Kit sample",
+      "url": "https://gitcode.com/HarmonyOS_Samples/intents-kit-samplecode-clientdemo-arkts",
+      "mode": "linked-official-reference"
+    },
+    {
+      "name": "OpenHarmony Skills practice guide",
+      "url": "https://gitcode.com/openharmonyinsight/openharmony-skills",
+      "mode": "linked-ecosystem-reference",
+      "notes": "Used for quality dimensions, risk calibration, and eval design. Not vendored because repository license status was unclear at review time."
+    }
+  ]
+}

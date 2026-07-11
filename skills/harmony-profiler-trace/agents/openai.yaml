@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Profiler Trace"
+  short_description: "Capture and interpret DevEco performance traces"
+  default_prompt: "Use $harmony-profiler-trace to profile this HarmonyOS flow."

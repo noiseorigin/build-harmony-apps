@@ -1,0 +1,9 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "Application entry module" },
+    { "name": "EntryAbility_desc", "value": "Application entry ability" },
+    { "name": "EntryAbility_label", "value": "__APP_NAME__" },
+    { "name": "page_title", "value": "__APP_NAME__" },
+    { "name": "continue_button", "value": "Continue" }
+  ]
+}

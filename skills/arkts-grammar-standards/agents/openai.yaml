@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkTS Grammar Standards"
+  short_description: "Apply ArkTS syntax rules and migration guidance"
+  default_prompt: "Use $arkts-grammar-standards to review this ArkTS syntax."

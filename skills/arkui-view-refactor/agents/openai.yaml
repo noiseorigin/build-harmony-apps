@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkUI View Refactor"
+  short_description: "Split and stabilize large ArkUI components"
+  default_prompt: "Use $arkui-view-refactor to refactor this ArkUI page without changing behavior."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Test Triage"
+  short_description: "Run and diagnose HarmonyOS unit and UI tests"
+  default_prompt: "Use $harmony-test-triage to diagnose these HarmonyOS test failures."

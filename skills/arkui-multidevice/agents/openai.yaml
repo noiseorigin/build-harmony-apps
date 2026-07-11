@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkUI Multi-device"
+  short_description: "Adapt ArkUI for phones, tablets, and foldables"
+  default_prompt: "Use $arkui-multidevice to adapt this screen across HarmonyOS device sizes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkUI UI Patterns"
+  short_description: "Build ArkUI screens with proven component patterns"
+  default_prompt: "Use $arkui-ui-patterns to implement this HarmonyOS interface."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Debugger Agent"
+  short_description: "Build, run, inspect, and debug HarmonyOS apps"
+  default_prompt: "Use $harmony-debugger-agent to build and debug this HarmonyOS app."

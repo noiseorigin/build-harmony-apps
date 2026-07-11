@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkUI Performance Audit"
+  short_description: "Audit ArkUI rendering and interaction performance"
+  default_prompt: "Use $arkui-performance-audit to audit this ArkUI screen for runtime performance."

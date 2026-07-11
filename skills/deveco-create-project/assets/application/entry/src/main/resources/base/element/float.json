@@ -1,0 +1,6 @@
+{
+  "float": [
+    { "name": "page_padding", "value": "24vp" },
+    { "name": "page_title_size", "value": "28fp" }
+  ]
+}

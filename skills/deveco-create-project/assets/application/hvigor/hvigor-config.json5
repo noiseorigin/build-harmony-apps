@@ -1,0 +1,10 @@
+{
+  "modelVersion": "__MODEL_VERSION__",
+  "dependencies": {},
+  "execution": {
+    "analyze": "normal",
+    "daemon": true,
+    "incremental": true,
+    "parallel": true
+  }
+}

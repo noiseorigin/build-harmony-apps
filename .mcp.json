@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "deveco-codegenie": {
+      "command": "npx",
+      "args": ["-y", "@deveco-codegenie/mcp@1.1.11"]
+    }
+  }
+}

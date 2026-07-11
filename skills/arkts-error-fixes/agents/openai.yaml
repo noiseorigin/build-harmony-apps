@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkTS Error Fixes"
+  short_description: "Diagnose and fix ArkTS compilation errors"
+  default_prompt: "Use $arkts-error-fixes to fix this ArkTS compiler error and rebuild."

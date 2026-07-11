@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "debug-build-run",
+      "prompt": "把这个 HarmonyOS 项目编译并在当前模拟器运行，确认首页已经打开。",
+      "expectedSkills": ["harmony-debugger-agent"],
+      "assertions": ["retain session context", "stop UI work on build failure", "prove launch with UI evidence"]
+    },
+    {
+      "id": "preview-device-matrix",
+      "prompt": "把这个设置页在手机和平板预览出来，给我对比截图。",
+      "expectedSkills": ["harmony-runtime-preview", "arkui-multidevice"],
+      "assertions": ["label device and state", "do not claim live mirror", "capture each material layout"]
+    },
+    {
+      "id": "profile-scroll-jank",
+      "prompt": "列表滚动卡顿，抓一份 DevEco Profiler trace 找到热点并做前后对比。",
+      "expectedSkills": ["arkui-performance-audit", "harmony-profiler-trace"],
+      "assertions": ["one focused flow", "preserve raw trace", "map trace to app code"]
+    },
+    {
+      "id": "memory-page-leak",
+      "prompt": "详情页进出十次后内存一直涨，证明是不是泄漏并修复。",
+      "expectedSkills": ["harmony-memory-leaks"],
+      "assertions": ["define intended lifetime", "same-flow before and after", "do not infer leak from heap size alone"]
+    },
+    {
+      "id": "intent-system-search",
+      "prompt": "把应用内的歌曲搜索接入小艺和系统本地搜索。",
+      "expectedSkills": ["harmony-app-intents"],
+      "assertions": ["verify open domain and intent", "thin executor", "state system verification level"]
+    },
+    {
+      "id": "native-design-review",
+      "prompt": "这个页面太像网页了，按 HarmonyOS 原生设计改一下并检查深色模式和无障碍。",
+      "expectedSkills": ["arkui-native-design", "arkui-ui-patterns"],
+      "assertions": ["prefer native components", "preserve brand", "render proof"]
+    },
+    {
+      "id": "arkui-code-audit",
+      "prompt": "先从代码审查这个 ArkUI 页面为什么频繁刷新，不够再让我抓 profiler。",
+      "expectedSkills": ["arkui-performance-audit"],
+      "assertions": ["identify state generation", "separate hypothesis and evidence", "targeted fix"]
+    },
+    {
+      "id": "ui-pattern-form",
+      "prompt": "实现一个带校验、加载、错误重试和弹窗确认的 ArkUI 编辑表单。",
+      "expectedSkills": ["arkui-ui-patterns"],
+      "assertions": ["state ownership", "async states", "accessibility and build verification"]
+    },
+    {
+      "id": "refactor-large-page",
+      "prompt": "把这个 450 行 ArkUI 页面拆开，但不要改变布局和行为。",
+      "expectedSkills": ["arkui-view-refactor"],
+      "assertions": ["baseline first", "narrow typed inputs and events", "behavior comparison"]
+    },
+    {
+      "id": "foldable-adaptation",
+      "prompt": "让这个新闻页适配手机、平板和折叠屏，折叠切换时保留选择状态。",
+      "expectedSkills": ["arkui-multidevice"],
+      "assertions": ["route composite scenario", "use window/capability evidence", "test transition"]
+    },
+    {
+      "id": "test-flake",
+      "prompt": "这个 Hypium UI 测试偶发失败，定位并消除 flaky。",
+      "expectedSkills": ["harmony-test-triage"],
+      "assertions": ["discover project task", "repeat same conditions", "replace sleeps with readiness"]
+    },
+    {
+      "id": "create-project",
+      "prompt": "新建一个名为 Notes 的 HarmonyOS ArkTS 应用并先确保能编译。",
+      "expectedSkills": ["deveco-create-project", "harmony-debugger-agent"],
+      "assertions": ["detect installed SDK", "do not overwrite", "build before features"]
+    },
+    {
+      "id": "arkts-syntax",
+      "prompt": "为什么 ArkTS 不接受这个 TypeScript 解构和内联对象类型？给出等价写法。",
+      "expectedSkills": ["arkts-grammar-standards"],
+      "assertions": ["label source class", "preserve semantics", "typed rewrite"]
+    },
+    {
+      "id": "compile-error",
+      "prompt": "build_project 报 ArkTS 类型错误，修掉并重新构建。",
+      "expectedSkills": ["arkts-error-fixes"],
+      "assertions": ["anchor exact diagnostic", "inspect SDK declaration", "focused check then build"]
+    },
+    {
+      "id": "runtime-crash",
+      "prompt": "应用能编译但点登录就 TypeError 闪退，这是 jscrash 日志。",
+      "expectedSkills": ["arkts-runtime-fix"],
+      "assertions": ["parse crash anchor", "minimal root-cause fix", "same-flow runtime proof"]
+    }
+  ],
+  "negativeCases": [
+    {
+      "prompt": "解释 HarmonyOS 和 OpenHarmony 的区别，不需要改项目。",
+      "mustNotRequire": ["harmony-debugger-agent", "deveco-create-project"]
+    },
+    {
+      "prompt": "只评审代码，不要启动设备或写文件。",
+      "mustNotMutate": true
+    }
+  ]
+}

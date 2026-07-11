@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Memory Leaks"
+  short_description: "Investigate and prove HarmonyOS memory leaks"
+  default_prompt: "Use $harmony-memory-leaks to investigate this HarmonyOS memory growth."

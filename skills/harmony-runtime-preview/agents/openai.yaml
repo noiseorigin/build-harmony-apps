@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Runtime Preview"
+  short_description: "Preview and verify HarmonyOS UI across devices"
+  default_prompt: "Use $harmony-runtime-preview to preview and verify this HarmonyOS screen."

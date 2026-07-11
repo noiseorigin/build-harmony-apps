@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkUI Native Design"
+  short_description: "Build and review native-feeling HarmonyOS UI"
+  default_prompt: "Use $arkui-native-design to make this ArkUI screen feel native to HarmonyOS."

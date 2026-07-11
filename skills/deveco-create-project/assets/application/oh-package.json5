@@ -1,0 +1,6 @@
+{
+  "modelVersion": "__MODEL_VERSION__",
+  "description": "__APP_NAME__ HarmonyOS application",
+  "dependencies": {},
+  "devDependencies": {}
+}
