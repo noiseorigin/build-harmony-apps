@@ -5,7 +5,7 @@ description: Build and refactor ArkUI screens with HarmonyOS-native component, n
 
 # ArkUI UI Patterns
 
-Use the project's SDK, ArkUI state-management generation, and nearby code as the first compatibility boundary. Use current Huawei documentation and official HarmonyOS samples as primary examples.
+Use the project's SDK, ArkUI state-management generation, and nearby code as the first compatibility boundary. Use current Huawei documentation and official HarmonyOS samples as primary examples — `devecocli docs search <component>` gives local official-doc lookup when the CLI is installed.
 
 Read `references/components-index.md` and then only the relevant reference. Pair with `../arkui-native-design/SKILL.md` for visual quality, `../arkui-multidevice/SKILL.md` for device adaptation, and `../arkui-view-refactor/SKILL.md` for behavior-preserving structural cleanup.
 

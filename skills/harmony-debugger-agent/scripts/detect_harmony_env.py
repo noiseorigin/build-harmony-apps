@@ -120,6 +120,8 @@ def main() -> int:
     if not hvigor:
         found = shutil.which("hvigorw")
         hvigor = Path(found) if found else None
+    found_cli = shutil.which("devecocli")
+    devecocli = Path(found_cli) if found_cli else None
 
     result: dict[str, Any] = {
         "platform": platform.platform(),
@@ -136,6 +138,7 @@ def main() -> int:
             "ohpm": str(ohpm) if ohpm else None,
             "traceStreamer": str(trace_streamer) if trace_streamer else None,
             "java": str(java) if java else None,
+            "devecocli": str(devecocli) if devecocli else None,
         },
     }
     if args.probe:
@@ -145,6 +148,8 @@ def main() -> int:
             probes["targets"] = run_probe([str(hdc), "list", "targets", "-v"])
         if hvigor:
             probes["hvigorVersion"] = run_probe([str(hvigor), "--version"])
+        if devecocli:
+            probes["devecocliVersion"] = run_probe([str(devecocli), "--version"])
         if trace_streamer:
             probes["traceStreamerVersion"] = run_probe([str(trace_streamer), "-v"])
         if java:

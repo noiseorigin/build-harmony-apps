@@ -16,8 +16,26 @@ SKILLS = ROOT / "skills"
 def main() -> int:
     errors: list[str] = []
     manifest = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
-    if manifest.get("name") != ROOT.name:
+    if manifest.get("name") not in {ROOT.name, ROOT.parent.name}:
         errors.append("plugin name does not match directory")
+    claude_manifest_path = ROOT / ".claude-plugin/plugin.json"
+    if not claude_manifest_path.is_file():
+        errors.append("missing .claude-plugin/plugin.json (dual-native packaging)")
+    else:
+        claude_manifest = json.loads(claude_manifest_path.read_text(encoding="utf-8"))
+        if claude_manifest.get("name") != manifest.get("name"):
+            errors.append("plugin.json name differs between codex and claude manifests")
+        codex_base_version = str(manifest.get("version", "")).split("+", 1)[0]
+        if claude_manifest.get("version") != codex_base_version:
+            errors.append("plugin.json base version differs between codex and claude manifests")
+    claude_marketplace_path = ROOT / ".claude-plugin/marketplace.json"
+    if not claude_marketplace_path.is_file():
+        errors.append("missing .claude-plugin/marketplace.json")
+    else:
+        claude_marketplace = json.loads(claude_marketplace_path.read_text(encoding="utf-8"))
+        entries = claude_marketplace.get("plugins", [])
+        if not any(entry.get("name") == manifest.get("name") for entry in entries if isinstance(entry, dict)):
+            errors.append("Claude marketplace does not list this plugin")
     mcp = json.loads((ROOT / ".mcp.json").read_text(encoding="utf-8"))
     mcp_text = json.dumps(mcp)
     if "@deveco-codegenie/mcp@1.1.11" not in mcp_text or "@latest" in mcp_text:
@@ -25,6 +43,19 @@ def main() -> int:
 
     eval_data = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
     covered = {name for case in eval_data.get("cases", []) for name in case.get("expectedSkills", [])}
+    case_ids: set[str] = set()
+    for case in eval_data.get("cases", []):
+        case_id = case.get("id", "<no id>")
+        if case_id in case_ids:
+            errors.append(f"duplicate eval case id: {case_id}")
+        case_ids.add(case_id)
+        for skill in case.get("expectedSkills", []):
+            if not (SKILLS / skill / "SKILL.md").is_file():
+                errors.append(f"eval {case_id} expects unknown skill: {skill}")
+        for field in ("mustInclude", "mustNotInclude"):
+            value = case.get(field)
+            if value is not None and (not isinstance(value, list) or not all(isinstance(v, str) for v in value)):
+                errors.append(f"eval {case_id} field {field} must be a list of strings")
     skill_names = set()
     for directory in sorted(path for path in SKILLS.iterdir() if path.is_dir()):
         skill_file = directory / "SKILL.md"
@@ -72,7 +103,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print(f"OK: {len(skill_names)} skills, {len(eval_data.get('cases', []))} routing evals, pinned MCP")
+    print(f"OK: {len(skill_names)} skills, {len(eval_data.get('cases', []))} routing fixtures, pinned MCP")
     return 0
 
 

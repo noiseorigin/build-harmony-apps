@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Kit Integration"
+  short_description: "Integrate HarmonyOS system Kits with permission and runtime evidence"
+  default_prompt: "Use $harmony-kit-integration to add this HarmonyOS system capability."

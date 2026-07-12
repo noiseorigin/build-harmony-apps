@@ -1,0 +1,23 @@
+{
+  "name": "build-harmony-apps",
+  "version": "0.2.0",
+  "description": "Build HarmonyOS apps with DevEco CodeGenie, ArkTS and ArkUI workflows for debugging, preview, profiling, memory, intents, multi-device UI, testing, Kit integration, release compliance, and refactoring.",
+  "author": {
+    "name": "Build Harmony Apps Contributors"
+  },
+  "homepage": "https://github.com/noiseorigin/build-harmony-apps",
+  "license": "MIT",
+  "keywords": [
+    "harmonyos",
+    "arkts",
+    "arkui",
+    "deveco-studio",
+    "codegenie",
+    "deveco-cli",
+    "hvigor",
+    "hdc",
+    "debugging",
+    "profiling",
+    "appgallery"
+  ]
+}

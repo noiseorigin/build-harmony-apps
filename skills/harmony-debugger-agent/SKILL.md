@@ -50,7 +50,8 @@ Report the resolved context, build result, launch proof, interactions performed,
 
 ## Fallbacks
 
-- If the MCP is unavailable, use project-local Hvigor and the DevEco-bundled HDC discovered by the script. Do not invent task names; inspect `hvigorw tasks` or `taskTree` first.
+- If the MCP is unavailable, prefer the official `devecocli` when the detector finds it (`references/deveco-cli.md`) — one pinned command surface for build/run/logs/screenshot/emulator control. Fall back to project-local Hvigor and the DevEco-bundled HDC only when neither MCP nor devecocli is available. Do not invent task names; inspect `hvigorw tasks` or `taskTree` first.
+- `devecocli` is also first choice for capabilities the MCP does not expose: emulator device-state injection (fold/rotate/sensor/GPS/battery) and local official-doc lookup (`devecocli docs search/read`).
 - For direct Hvigor on HarmonyOS projects, use the detector's `devecoSdkHome` as `DEVECO_SDK_HOME` and its `javaHome` as `JAVA_HOME` when those variables are not already valid. Do not write these machine paths into committed project files.
 - If no target is available, finish code/build work and state that runtime verification is pending.
 - If UI automation cannot address a system dialog, capture the current frame and request the minimum manual action instead of tapping blindly.

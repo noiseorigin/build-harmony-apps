@@ -1,0 +1,19 @@
+{
+  "name": "build-harmony-apps-marketplace",
+  "metadata": {
+    "description": "HarmonyOS development plugins for ArkTS, ArkUI, DevEco tooling, Kit integration, debugging, profiling, testing, and release workflows"
+  },
+  "owner": {
+    "name": "noiseorigin"
+  },
+  "plugins": [
+    {
+      "name": "build-harmony-apps",
+      "source": {
+        "source": "github",
+        "repo": "noiseorigin/build-harmony-apps"
+      },
+      "description": "Build, debug, integrate, test, profile, and release HarmonyOS apps with ArkTS, ArkUI, and DevEco workflows"
+    }
+  ]
+}

@@ -28,3 +28,12 @@ Sizes are raw bytes. Preserve original exports beside normalized files.
 - Inspect references, listeners, timers, tasks, workers, caches, resources, and native handles.
 - Establish intended lifetime before calling retained data a leak.
 - Repeat after the patch using identical cycles.
+
+## Common retention sources (ArkTS)
+
+- Listeners registered with `on()` and never `off()` — anonymous callbacks cannot be unregistered; require named references. Check `aboutToDisappear`/`onBackground` for the matching release.
+- Long-lived closures capturing `this` of a component (keeps the whole subtree alive).
+- Unbounded caches — a fix is usually `util.LRUCache` with a size bound plus `onMemoryLevel` trimming (`MEMORY_LEVEL_CRITICAL` → clear, `LOW` → trim).
+- Full-resolution PixelMaps where thumbnails suffice; note PixelMaps with `editable: false` from decodable sources are OS-purgeable — apparent "growth" that the OS can reclaim is not app leak evidence by itself.
+
+Retention checklist adapted from DengShiyingA/harmonyos-ai-skill (MIT).
