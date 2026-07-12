@@ -12,10 +12,10 @@ Read `references/triage-map.md`. Pair with `../arkts-grammar-standards/SKILL.md`
 ## Workflow
 
 1. Preserve the first compiler invocation, error code/message, file, line, related notes, module, product, target, and SDK/build-tool versions.
-2. Use `mcp__deveco-codegenie__check_ets_files` for focused ETS diagnostics when available. Use `check_cpp_files` for native sources.
+2. Use `mcp__deveco-codegenie__check_ets_files` for focused ETS diagnostics when available; the official deveco-cli MCP offers equivalent LSP-backed `check_ets_files`/`check_cpp_files` when configured per project (`../harmony-debugger-agent/references/deveco-cli.md`). Either is faster than a full build for syntax-level errors.
 3. Reproduce with the narrowest project-defined build task. Ignore cascades until the earliest causal error is resolved.
 4. Classify: ArkTS restriction/type, ArkUI decorator/state, API availability/signature, import/module/OHM URL, resource/profile, Hvigor/configuration, native bridge, or generated code.
-5. Inspect the installed SDK declarations or current official API docs for unfamiliar `@kit.*`/`@ohos.*` signatures.
+5. Inspect the installed SDK declarations or official API docs for unfamiliar `@kit.*`/`@ohos.*` signatures — `devecocli docs search <API>` gives local official-doc lookup when the CLI is installed; otherwise web-search the current docs.
 6. Make the smallest semantic fix. Avoid broad casts, suppression, arbitrary defaults, and unrelated formatting churn.
 7. Re-run the focused check, then rebuild the affected module/app. If behavior could change, launch and verify the relevant flow.
 

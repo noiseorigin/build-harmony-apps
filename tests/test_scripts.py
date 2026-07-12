@@ -108,6 +108,45 @@ class ScriptTests(unittest.TestCase):
             profile = Path(data["projectRoot"]) / "build-profile.json5"
             self.assertNotIn("__TARGET_SDK__", profile.read_text(encoding="utf-8"))
 
+    def test_recorded_routing_results(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            results = Path(raw) / "results.json"
+            results.write_text(
+                json.dumps(
+                    {
+                        "results": [
+                            {
+                                "id": "release-submission",
+                                "selectedSkills": ["harmony-release-compliance"],
+                                "response": "先核对 Profile 目标；常规 .app 流程使用 assembleApp，并以当前 AGC 要求为准。",
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            result = run_script("scripts/evaluate_routing_results.py", "--allow-partial", str(results))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+            results.write_text(
+                json.dumps(
+                    {
+                        "results": [
+                            {
+                                "id": "release-submission",
+                                "selectedSkills": [],
+                                "response": "软著必须。",
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            result = run_script("scripts/evaluate_routing_results.py", "--allow-partial", str(results))
+            self.assertNotEqual(result.returncode, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

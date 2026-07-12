@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harmony Release Compliance"
+  short_description: "Sign, package, submit, and pass AppGallery review"
+  default_prompt: "Use $harmony-release-compliance to prepare this HarmonyOS app for release."

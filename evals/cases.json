@@ -90,6 +90,46 @@
       "prompt": "应用能编译但点登录就 TypeError 闪退，这是 jscrash 日志。",
       "expectedSkills": ["arkts-runtime-fix"],
       "assertions": ["parse crash anchor", "minimal root-cause fix", "same-flow runtime proof"]
+    },
+    {
+      "id": "kit-camera-permission",
+      "prompt": "给应用加拍照功能，相机权限怎么申请怎么写？",
+      "expectedSkills": ["harmony-kit-integration"],
+      "assertions": ["offer CameraPicker permissionless path first", "module.json5 reason and usedScene", "requestPermissionsFromUser with settings fallback"],
+      "mustInclude": ["module.json5", "requestPermissionsFromUser"],
+      "mustNotInclude": ["AndroidManifest"]
+    },
+    {
+      "id": "kit-background-audio",
+      "prompt": "音乐 App 切到后台就不播了，怎么解决？",
+      "expectedSkills": ["harmony-kit-integration"],
+      "assertions": ["AVSession creation with metadata", "AUDIO_PLAYBACK continuous task", "both mandatory"],
+      "mustInclude": ["AVSession", "长时任务"],
+      "mustNotInclude": ["Service 保活"]
+    },
+    {
+      "id": "form-not-refreshing",
+      "prompt": "桌面服务卡片 build() 跑了但 UI 一直显示旧图，杀掉 App 重启才正常。",
+      "expectedSkills": ["harmony-kit-integration", "arkui-ui-patterns"],
+      "assertions": ["check @Builder param indirection before fd caching", "formImages memory:// protocol", "state chain diagnosis"],
+      "mustInclude": ["@Builder"],
+      "mustNotInclude": []
+    },
+    {
+      "id": "release-submission",
+      "prompt": "应用要上华为应用市场，签名打包和提审要做什么？",
+      "expectedSkills": ["harmony-release-compliance"],
+      "assertions": ["separate build mode from Profile destination", "inspect current AGC artifact requirement and use assembleApp for the normal .app flow", "check versionCode against the target channel"],
+      "mustInclude": ["assembleApp", "Profile"],
+      "mustNotInclude": ["软著必须"]
+    },
+    {
+      "id": "baseline-guard",
+      "prompt": "帮我写一个生产可用的鸿蒙相机功能方案。",
+      "expectedSkills": ["harmony-kit-integration"],
+      "assertions": ["production defaults to API 24 Release", "API 26 labeled preview only"],
+      "mustInclude": [],
+      "mustNotInclude": ["默认使用 API 26"]
     }
   ],
   "negativeCases": [

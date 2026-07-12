@@ -22,4 +22,17 @@ These are linter/compiler-oriented summaries, not verbatim specification text. V
 - Check constructor/initialization, capture, inheritance, and collection rules in the current ArkTS specification.
 - Do not assume an object/array literal or ordinary class becomes sendable through an assertion.
 
-Source class: linter/compiler-derived guidance adapted from DevEco CodeGenie. Name that source class when citing a restriction.
+## Production red lines (device/build-verified)
+
+- `throw` only `Error` instances (`arkts-limited-throw`); encode error codes as message prefixes for upstream branching.
+- `PersistentStorage.persistProp` calls belong at file top level, before `@Entry` — inside a component they run too late.
+- `@Builder` is for static composition only; anything needing data reactivity, internal state, or lifecycle must be a `@Component` (see also the builder-parameter tracking trap in arkui-ui-patterns `state-pitfalls.md`).
+- No leading statements inside `build()` — precompute in `aboutToAppear` or getters.
+- `$rawfile()` accepts literals only, not computed strings.
+- Color literals are `#AARRGGBB` (alpha first); gradient `colors` arrays take strings, not ints.
+- Every `ResultSet` closes in `try/finally`.
+- `blur`/`backdropBlur` are real-time render costs — never inside scrolling list rows.
+- `@LocalBuilder` binds `this` to the owning component; plain `@Builder` passed across components changes the receiver.
+- `Record<string, X>` is the dictionary type; `object`/`any` are rejected.
+
+Source class: linter/compiler-derived guidance adapted from DevEco CodeGenie; red lines from chen_jeff/harmony-os-skill (gitee), build-verified. Name the source class when citing a restriction.

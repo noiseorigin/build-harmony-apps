@@ -1,7 +1,30 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-10",
+  "checkedAt": "2026-07-12",
   "sources": [
+    {
+      "name": "HarmonyOS AI Skill knowledge pack",
+      "url": "https://github.com/DengShiyingA/harmonyos-ai-skill",
+      "license": "MIT",
+      "mode": "knowledge-adaptation",
+      "paths": ["harmonyos-development/SKILL.md"],
+      "notes": "Curated subset of the 4450-line knowledge pack rewritten into per-skill references (platform baseline, ArkUI components, state management, Kits, permissions, performance, testing). API 21/SDK 6.0.1-era content kept only as version-labeled error recipes; each adapted file carries a source line and a docs-verification header."
+    },
+    {
+      "name": "HarmonyOS practice skills (chen_jeff)",
+      "url": "https://gitee.com/chen_jeff/harmony-os-skill",
+      "license": "MulanPSL-2.0 treated as authoritative from LICENSE file; README states MIT inconsistently",
+      "mode": "knowledge-adaptation",
+      "notes": "Production pitfall skills (state-tracking chains, service cards, atomic services, signing/submission, IAP) rewritten into references with their verification methods preserved. No upstream files are vendored verbatim. Regulatory and store-policy claims are scoped and require current official verification. Symptom-style trigger phrasing adopted for skill descriptions."
+    },
+    {
+      "name": "DevEco CLI",
+      "url": "https://gitcode.com/openharmony-sig/deveco-cli",
+      "observedNpmVersion": "1.0.0",
+      "license": "MIT",
+      "mode": "tool-integration",
+      "notes": "Official unified CLI referenced as a tool surface (build/run/log/emulator state/docs search/MCP syntax check) in the debugger, create-project, error-fix, and multidevice skills. No code vendored; command quick-reference adapted from its SKILL.md."
+    },
     {
       "name": "OpenAI Build iOS Apps",
       "url": "https://github.com/openai/plugins",

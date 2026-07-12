@@ -1,5 +1,37 @@
 # ArkTS runtime signatures
 
+## Fault classes (faultlogger taxonomy)
+
+| Type | Meaning | Note |
+|---|---|---|
+| `JS_ERROR` | ArkTS/JS uncaught exception | most common class |
+| `CPP_CRASH` | native signal (SIGSEGV/SIGABRT) | needs native stack, not ArkTS-only diagnosis |
+| `APP_FREEZE` | main thread blocked > ~6s (ANR equivalent) | dominant root causes: thread locks, system resource waits, heavy main-thread work |
+| `OOM` | out-of-memory kill | pair with `../../harmony-memory-leaks/SKILL.md` |
+
+## Runtime capture hooks
+
+```ts
+import { errorManager } from '@kit.AbilityKit';
+const observerId = errorManager.on('error', {
+  onUnhandledException(errMsg: string): void { /* report */ },
+  onException(errObject: Error): void { /* name/message/stack */ }
+});
+```
+
+```ts
+import { hiAppEvent } from '@kit.PerformanceAnalysisKit';
+hiAppEvent.addWatcher({
+  name: 'crashWatcher',
+  appEventFilters: [{ domain: hiAppEvent.domain.OS, names: [hiAppEvent.event.APP_CRASH] }],
+  onReceive: (domain, groups) => { /* persist for next-launch upload */ }
+});
+```
+
+Use these for in-app capture/reporting; they do not replace faultlogger artifacts as diagnosis evidence.
+
+## Signature table
+
 | Signature | Common category | Evidence to inspect |
 | --- | --- | --- |
 | `TypeError` property/call | null/undefined, wrong payload, lifecycle order | message, first app frame, value initialization and producer |
@@ -16,3 +48,5 @@ Prefer, in order: user-provided crash artifact, matching recent faultlogger file
 ## Verification
 
 The original action must complete, the original signature must be absent, and a relevant regression path must still work. A defensive guard that hides the crash while dropping the user action is not a valid fix.
+
+Fault taxonomy and capture hooks adapted from DengShiyingA/harmonyos-ai-skill (MIT); verify API shapes against the installed SDK.

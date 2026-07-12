@@ -1,5 +1,7 @@
 # Lists and async states
 
+Concrete container/row code (LazyForEach, @Reusable, Swiper/WaterFlow/Grid, swipe-delete, pull-refresh, sticky groups) lives in `components-scroll.md`; this file covers the decision rules.
+
 ## Lists
 
 - Use stable domain identity; do not use position as identity when items insert, remove, or reorder.

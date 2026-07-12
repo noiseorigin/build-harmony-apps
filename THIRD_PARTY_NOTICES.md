@@ -22,6 +22,24 @@ API workflows link to, but do not vendor, Huawei Developer documentation and Har
 
 Source: https://gitcode.com/HarmonyOS_Samples/intents-kit-samplecode-clientdemo-arkts
 
+## HarmonyOS AI Skill knowledge pack (DengShiyingA)
+
+Knowledge content across skill references (platform baseline, ArkUI component/state/performance patterns, Kit integration, permissions, testing) is adapted from `DengShiyingA/harmonyos-ai-skill`, distributed under the MIT License. Content was curated, restructured into per-skill references, version-labeled, and cross-checked against official documentation at adaptation time.
+
+Source: https://github.com/DengShiyingA/harmonyos-ai-skill
+
+## HarmonyOS practice skills (chen_jeff)
+
+Production pitfall knowledge (ArkUI state-tracking chains, service-card refresh/transparency/image passing, atomic-service constraints, signing and AppGallery submission, IAP integration) is adapted from `chen_jeff/harmony-os-skill`. Its LICENSE file carries the Mulan PSL v2 while the README states MIT. This project conservatively treats the repository LICENSE file (MulanPSL-2.0) as authoritative, records the inconsistency, and does not vendor upstream files verbatim. Community release/compliance observations are labeled as operational evidence and require current official verification.
+
+Source: https://gitee.com/chen_jeff/harmony-os-skill
+
+## DevEco CLI
+
+The `devecocli` command surface referenced by the debugger, project-creation, error-fixing, and multi-device skills is the openharmony-sig DevEco CLI, distributed under the MIT License. This plugin documents and invokes the tool; it does not vendor its code.
+
+Source: https://gitcode.com/openharmony-sig/deveco-cli
+
 ## Community references
 
 Workflow ideas were reviewed from Eclipse Oniro `agent-skills`, Midscene `midscene-skills`, and other public HarmonyOS skill repositories. They are references only; no source code or assets from those repositories are included.

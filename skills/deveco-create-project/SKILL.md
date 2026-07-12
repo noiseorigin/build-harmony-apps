@@ -5,7 +5,13 @@ description: Create a minimal HarmonyOS Stage-model ArkTS application project wi
 
 # DevEco Create Project
 
-Use the bundled script instead of reproducing project files from memory. This workflow adapts DevEco CodeGenie's deterministic template-copy pattern while reading the currently installed DevEco metadata.
+Never reproduce project files from memory. Scaffold order: **official `devecocli create` when installed** (detect via `devecocli --version`) → the bundled deterministic template script → DevEco Studio's New Project wizard for anything beyond a minimal Stage-model app.
+
+```bash
+devecocli create --app-name MyApp [--project-path ./dir] [--bundle-name com.x.y] [--api-level 23]
+```
+
+`devecocli create` uses Huawei's current official template and API detection (`../harmony-debugger-agent/references/deveco-cli.md`). The bundled script below is the offline fallback; it adapts DevEco CodeGenie's deterministic template-copy pattern while reading installed DevEco metadata. Platform/version context: `references/platform-baseline.md`; Stage-model structure: `references/stage-model.md`; build hardening: `references/build-sign-release.md`.
 
 ## Inputs
 
