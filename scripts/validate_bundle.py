@@ -16,7 +16,7 @@ SKILLS = ROOT / "skills"
 def main() -> int:
     errors: list[str] = []
     manifest = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
-    if manifest.get("name") != ROOT.name:
+    if manifest.get("name") not in {ROOT.name, ROOT.parent.name}:
         errors.append("plugin name does not match directory")
     claude_manifest_path = ROOT / ".claude-plugin/plugin.json"
     if not claude_manifest_path.is_file():
