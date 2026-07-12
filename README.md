@@ -2,6 +2,8 @@
 
 支持 Codex 与 Claude Code 双平台的 HarmonyOS 开发插件，参考 OpenAI `Build iOS Apps` 的任务型结构，优先复用华为 DevEco CodeGenie 官方能力，并整合 OpenHarmony SIG DevEco CLI 与社区实战知识。
 
+详细使用说明（17 个 Skill 的触发方式与工作流程、工具链、排障 FAQ）见 [docs/USAGE.md](docs/USAGE.md)。
+
 ## 能力
 
 - 构建、启动、UI 树、交互、截图与日志调试(CodeGenie MCP + devecocli 工具阶梯)
