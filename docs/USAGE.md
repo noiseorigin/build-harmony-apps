@@ -2,6 +2,8 @@
 
 面向使用者的完整手册：安装配置、快速上手、17 个 Skill 的触发方式与工作流程、工具链说明、排障与 FAQ。开发与贡献相关内容（结构校验、evals、CI）见 [README.md](../README.md#验证)。
 
+场景指南：[iOS 应用迁移 HarmonyOS](IOS-MIGRATION.md)——按迁移阶段组织的 Skill 用法与概念映射。
+
 ## 目录
 
 - [1. 简介](#1-简介)
