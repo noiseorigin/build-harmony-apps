@@ -17,11 +17,14 @@ When the official `devecocli` is installed, device-state transitions become scri
 
 ```bash
 devecocli emulator list                                   # find name/serial
+devecocli ui screenshot --device <t> --path ./shots/before.png
 devecocli emulator fold <state> --target <t>              # fold ↔ unfold transitions
 devecocli emulator rotate left|right --target <t>         # orientation
 devecocli emulator battery --target <t> --level 15        # low-battery UI
 devecocli emulator geolocation --target <t> --longitude 116.40 --latitude 39.90
-devecocli ui screenshot --target-dir exists --path ./shots/fold-after.png
+devecocli ui window list --device <t> --format json
+devecocli ui layout --device <t> --format json --mode simplified
+devecocli ui screenshot --device <t> --path ./shots/fold-after.png
 ```
 
-Capture a screenshot before and after each transition as the matrix evidence. Foldable device types (`foldable`/`widefold`/`triplefold`) are available via `devecocli emulator create --device-type <type>`. See `../../harmony-debugger-agent/references/deveco-cli.md` for the full command surface and hard rules (license acceptance, image downloads).
+Create the writable `./shots` directory before running the example. `ui screenshot --path` is required. UI commands select the device with `--device`, while emulator state commands use `--target`. Capture before/after frames and re-read `ui layout` before the primary interaction. Foldable device types (`foldable`/`widefold`/`triplefold`) are available via `devecocli emulator create --device-type <type>`. See `../../harmony-debugger-agent/references/deveco-cli.md` for authorization boundaries around license acceptance and image downloads.

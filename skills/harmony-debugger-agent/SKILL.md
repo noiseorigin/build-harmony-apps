@@ -5,7 +5,7 @@ description: Build, install, launch, inspect, automate, and debug HarmonyOS ArkT
 
 # Harmony Debugger Agent
 
-Use the official `deveco-codegenie` MCP for the normal build/run/UI loop. Use direct Hvigor or HDC only for a capability the MCP does not expose, and keep every device command pinned to an explicit target when more than one target is connected.
+Use the official `deveco-codegenie` MCP for the normal build/run/UI loop. An already installed official `devecocli` is an optional supplement or fallback; use direct Hvigor or HDC only when neither higher-level surface exposes the capability. Keep every device command pinned to an explicit target when more than one target is connected.
 
 Read `references/session-contract.md` before the first build in a task. Read `references/codegenie-tools.md` when choosing MCP parameters or handling a missing tool.
 
@@ -50,7 +50,9 @@ Report the resolved context, build result, launch proof, interactions performed,
 
 ## Fallbacks
 
-- If the MCP is unavailable, prefer the official `devecocli` when the detector finds it (`references/deveco-cli.md`) — one pinned command surface for build/run/logs/screenshot/emulator control. Fall back to project-local Hvigor and the DevEco-bundled HDC only when neither MCP nor devecocli is available. Do not invent task names; inspect `hvigorw tasks` or `taskTree` first.
+- If CodeGenie is unavailable, prefer the official `devecocli` only when the detector finds a compatible installation. Read `references/deveco-cli.md` before invoking it; do not install, update, initialize/configure, authenticate, sign, accept licenses, download images, or uninstall incidentally.
+- With CLI UI fallback, use `ui window list`/`ui layout` to resolve current nodes, `ui click`/`ui text`/`ui swipe` for interaction, and `ui screenshot --path <writable-path>` for evidence. Pin UI commands with `--device`, then re-read the layout after state changes.
+- Fall back to project-local Hvigor and the DevEco-bundled HDC only when neither CodeGenie nor a compatible `devecocli` is available. Do not invent task names; inspect `hvigorw tasks` or `taskTree` first.
 - `devecocli` is also first choice for capabilities the MCP does not expose: emulator device-state injection (fold/rotate/sensor/GPS/battery) and local official-doc lookup (`devecocli docs search/read`).
 - For direct Hvigor on HarmonyOS projects, use the detector's `devecoSdkHome` as `DEVECO_SDK_HOME` and its `javaHome` as `JAVA_HOME` when those variables are not already valid. Do not write these machine paths into committed project files.
 - If no target is available, finish code/build work and state that runtime verification is pending.

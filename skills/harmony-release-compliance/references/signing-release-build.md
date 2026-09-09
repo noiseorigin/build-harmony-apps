@@ -6,7 +6,7 @@ Device-verified SOP, checked 2026-07. Console flows change — verify current AG
 
 DevEco's default Run normally uses auto signing. Some approved AGC capabilities depend on matching certificate/Profile entitlements and can be absent from an automatically generated test package. When capability evidence differs from the configured Profile, verify with a manually configured, device-authorized package. Keep build mode (`debug`/`release`) separate from distribution Profile type.
 
-## Profile types (the核心 distinction)
+## Profile types (the core distinction)
 
 | | Debug Profile | Release Profile |
 |---|---|---|

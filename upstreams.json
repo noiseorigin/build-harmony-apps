@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-12",
+  "checkedAt": "2026-08-25",
   "sources": [
     {
       "name": "HarmonyOS AI Skill knowledge pack",
@@ -20,10 +20,11 @@
     {
       "name": "DevEco CLI",
       "url": "https://gitcode.com/openharmony-sig/deveco-cli",
-      "observedNpmVersion": "1.0.0",
+      "observedNpmVersion": "1.3.0",
+      "commit": "33bd44809659b3e3834e28bb38e1aea20d302482",
       "license": "MIT",
       "mode": "tool-integration",
-      "notes": "Official unified CLI referenced as a tool surface (build/run/log/emulator state/docs search/MCP syntax check) in the debugger, create-project, error-fix, and multidevice skills. No code vendored; command quick-reference adapted from its SKILL.md."
+      "notes": "Official unified CLI used as an optional external backend for create/build/run/device/ui/log, emulator state, local docs, and project-scoped MCP code analysis. Full integration baseline is 1.3.0; installed command help and observable artifacts remain authoritative. No code or broad upstream skill is vendored."
     },
     {
       "name": "OpenAI Build iOS Apps",
