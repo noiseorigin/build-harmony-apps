@@ -20,7 +20,7 @@
 @deveco-codegenie/mcp@1.1.11
 ```
 
-可选增强：安装 [OpenHarmony SIG DevEco CLI](https://gitcode.com/openharmony-sig/deveco-cli)(`npm i -g @deveco/deveco-cli`)后,skill 会自动利用其本地文档检索(`devecocli docs search`)、模拟器状态注入(折叠/传感器/GPS)与脚手架能力。
+可选增强：安装 [OpenHarmony SIG DevEco CLI](https://gitcode.com/openharmony-sig/deveco-cli)（`npm i -g @deveco/deveco-cli@1.3.0`）后，Skill 会自动利用其脚手架、构建/运行、设备与 UI 操作、日志、本地文档检索和模拟器状态注入能力；CLI 缺失或能力不匹配时仍保留 CodeGenie MCP 与原始工具链回退。
 
 ## 安装
 
@@ -75,7 +75,7 @@ CI(`.github/workflows/validate.yml`)在 push/PR 时自动跑前两项。`evals/c
 | [DevEco CodeGenie skills](https://gitcode.com/southbridge/codegenie_cli) | MIT(部分脚本 Apache-2.0) | 项目创建、ArkTS 语法/编译分诊、崩溃证据工作流(固定快照改编,未拷贝脚本) |
 | [DengShiyingA/harmonyos-ai-skill](https://github.com/DengShiyingA/harmonyos-ai-skill) | MIT | 平台版本基线、ArkUI 组件/状态管理/性能、60+ Kit 集成、权限流程等知识内容(精选改编并对照官方文档) |
 | [chen_jeff/harmony-os-skill](https://gitee.com/chen_jeff/harmony-os-skill) | 以 LICENSE 的木兰 PSL v2 为准(README 的 MIT 声明不一致) | 已上架应用沉淀的实战踩坑:状态追踪断链、服务卡片刷新/透明/跨进程图片、元服务约束、签名提审、IAP;发布与合规结论需再核对官方现行规则 |
-| [openharmony-sig/deveco-cli](https://gitcode.com/openharmony-sig/deveco-cli) | MIT | 官方统一 CLI 作为工具阶梯的一环:build/run/log、模拟器状态注入、本地文档检索、MCP 语法诊断(仅引用命令面,未 vendor 代码) |
+| [openharmony-sig/deveco-cli](https://gitcode.com/openharmony-sig/deveco-cli) | MIT | 官方统一 CLI 作为工具阶梯的一环：create/build/run/device/ui/log、模拟器状态注入、本地文档检索与 MCP 代码分析（仅引用命令面，未 vendor 代码） |
 | [HarmonyOS Intents Kit sample](https://gitcode.com/HarmonyOS_Samples/intents-kit-samplecode-clientdemo-arkts) | — | Intents Kit 工作流的官方参考样例(仅链接) |
 | [openharmonyinsight/openharmony-skills](https://gitcode.com/openharmonyinsight/openharmony-skills) | 未明确 | 质量维度与 eval 设计参考(仅参考,未收录内容) |
 

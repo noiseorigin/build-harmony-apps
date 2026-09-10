@@ -52,15 +52,16 @@ Build Harmony Apps 是一个支持 **Claude Code 与 Codex 双平台**的 Harmon
 ### 可选增强：OpenHarmony SIG DevEco CLI
 
 ```bash
-npm i -g @deveco/deveco-cli
+npm i -g @deveco/deveco-cli@1.3.0
 ```
 
-要求 Node ≥ 18、已安装 DevEco Studio ≥ 6.1，仅支持 macOS/Windows。安装后各 Skill 会**自动检测并利用**（通过 `devecocli --version` 探测），获得以下增强能力：
+完整集成基线为 `devecocli ≥ 1.3.0`（同一 major），要求 Node ≥ 22，并满足 DevEco Studio ≥ 6.0 或 Command Line Tools ≥ 26。支持 macOS/Windows；Linux 必须使用 CLT 并设置 `DEVECO_CLI_CLT_PATH`。模拟器命令另需 DevEco Studio ≥ 6.1。安装后各 Skill 会通过 `devecocli --version` 和相关子命令 `--help` 做能力探测，获得以下增强能力：
 
 - **本地官方文档检索**：`devecocli docs search <关键词>`，查 API 签名、组件用法时不再依赖联网搜索；
+- **设备 UI 调试**：`ui layout/window/click/swipe/text/screenshot` 可读取可见 UI 树并执行聚焦交互；
 - **模拟器状态注入**：折叠/展开、旋转、GPS 坐标、电量、传感器——CodeGenie MCP 不具备的能力；
-- **官方脚手架**：`devecocli create` 使用华为当前官方模板创建项目（优先于插件内置模板）；
-- **LSP 语法诊断**：`devecocli serve mcp` 提供不经完整构建的 `check_ets_files` / `check_cpp_files`（需按项目配置，见 [5.3](#53-可选devecocli-增强)）。
+- **Empty Ability 脚手架**：`devecocli create` 使用 CLI 自带模板创建项目（优先于插件内置模板；复杂模板仍交给 DevEco Studio 向导）；
+- **LSP 代码分析**：`devecocli serve mcp` 提供统一 `check` 及 hover/definition/references 等工具（需按项目显式配置，见 [5.3](#53-可选devecocli-增强)）。
 
 不安装也完全可用，只是相应能力回退到 CodeGenie MCP 与内置方案。
 
@@ -170,8 +171,8 @@ Agent 会自动路由到 `harmony-debugger-agent`：初始化项目路径 → �
 | 能力 | 首选 | 次选 | 兜底 |
 |---|---|---|---|
 | 构建 / 安装 / 启动 / 日志 | CodeGenie MCP | `devecocli build/run/log` | 原始 hvigor + hdc |
-| UI 树 / 点击 / 输入 | CodeGenie MCP（唯一） | — | `devecocli ui screenshot` 仅作截图证据 |
-| ArkTS 语法诊断 | CodeGenie / devecocli 的 `check_ets_files`（免完整构建） | 完整构建 | — |
+| UI 树 / 点击 / 输入 | CodeGenie MCP | `devecocli ui layout/click/text/swipe` | HDC 仅作有限兜底 |
+| ArkTS 语法诊断 | CodeGenie `check_ets_files` | 已显式配置的 devecocli MCP `check` | 最窄完整构建 |
 | 项目脚手架 | `devecocli create` | 插件内置模板脚本 | DevEco Studio 新建向导 |
 | 文档检索 | `devecocli docs search/read`（本地官方文档） | 联网搜索官方文档 | — |
 | 模拟器状态注入（折叠/传感器/GPS/电量） | `devecocli emulator …`（唯一） | — | — |
@@ -180,10 +181,13 @@ Agent 会自动路由到 `harmony-debugger-agent`：初始化项目路径 → �
 
 ### 5.3 可选：devecocli 增强
 
-安装方法见 [第 2 节](#2-环境要求)。两点补充说明：
+安装方法见 [第 2 节](#2-环境要求)。补充说明：
 
-- **LSP 语法诊断需按项目初始化**：`devecocli serve mcp` 依赖项目级环境变量（`PROJECT_PATH`），所以它不在插件全局 `.mcp.json` 里，需要在目标项目中运行 `devecocli init --mcp --agent <agent> --project <path>` 后才可用。
-- 部分 emulator 子命令有硬性限制（license 接受需要交互式终端、镜像下载耗时 30 分钟以上不可自动重试等），遇到时 Skill 会把命令交给你手动执行，这是预期行为而非故障。
+- **MCP 必须显式配置**：`devecocli serve mcp` 依赖项目上下文，不放进插件全局 `.mcp.json`。仅在用户要求时运行 `devecocli init --mcp --agent <agent> --project <path>`；该命令会修改 Agent 配置。
+- **许可与长操作不自动执行**：`devecocli emulator license` 是交互式协议确认；`license accept` 虽可用于非交互终端，仍必须由用户明确授权。镜像下载耗时较长，失败后不自动重试。
+- **隐私**：CLI 默认开启匿名遥测；自动化环境可按用户选择设置 `DEVECO_CLI_DISABLE_TELEMETRY=1`。Skill 不会替用户永久修改该设置。
+- **沙箱**：CLI 会初始化用户日志/数据目录；若宿主沙箱返回 `EPERM`，Skill 会按宿主授权流程在沙箱外重试，而不是改写 CLI 文件或伪造探测结果。
+- **版本与输出**：以安装版 `--help`、退出码和产物为准；优先使用 JSON 输出，不解析易变化的人类文案。
 
 ## 6. Skill 参考
 
@@ -234,7 +238,7 @@ Agent 会自动路由到 `harmony-debugger-agent`：初始化项目路径 → �
 > - "创建一个叫 MyNotes 的鸿蒙项目，包名 com.example.mynotes"
 > - "在这个空目录初始化一个 HarmonyOS 工程"
 
-**工作流程**：脚手架优先级为官方 `devecocli create` → 插件内置确定性模板脚本（`../skills/deveco-create-project/scripts/create_project.py`，离线可用，读取已安装 DevEco SDK 元数据做替换）→ 超出最小 Stage-model 范围（元服务、HAR/HSP、C++、签名等）改用 DevEco Studio 官方新建向导。生成后校验完整性并通过 harmony-debugger-agent 做一次干净构建。
+**工作流程**：脚手架优先级为 `devecocli create --project-path <最终工程目录>` → 插件内置确定性模板脚本（`../skills/deveco-create-project/scripts/create_project.py`，离线可用，读取已安装 DevEco SDK 元数据做替换）→ 超出 Empty Ability / 最小 Stage-model 范围（元服务、HAR/HSP、C++、签名等）改用 DevEco Studio 官方新建向导。CLI 输出按文本处理，本地脚本输出才读取 JSON；两条路径都独立校验工程结构并做一次干净构建。CLI 失败若已留下部分目录，不会再把本地模板合并进去。
 
 **依赖与产物**：需要已安装 DevEco SDK（不猜 API level）；不覆盖非空目录、不发明签名材料。产物：可构建的完整 Stage-model 工程（AppScope、entry 模块、EntryAbility、Index 页面等）。
 
@@ -277,9 +281,9 @@ Agent 会自动路由到 `harmony-debugger-agent`：初始化项目路径 → �
 > - "构建报了这个错：Property 'xxx' does not exist…"
 > - "帮我把这一堆编译错误清掉"
 
-**工作流程**：保留首个编译错误的完整上下文 → 用 `check_ets_files` 做聚焦诊断（比完整构建快）→ 用最窄的构建任务复现，先修最早的因果错误、忽略级联 → 分类（语言限制/装饰器/API 可用性/模块导入/资源/Hvigor 配置/原生桥/生成代码）→ 最小语义修复 → 重跑聚焦检查再重建。不熟悉的 `@kit.*` API 用 `devecocli docs search` 或官方文档核对签名。
+**工作流程**：保留首个编译错误的完整上下文 → 用 CodeGenie `check_ets_files` 或已显式配置的 devecocli MCP `check` 做聚焦诊断（比完整构建快）→ 用最窄的构建任务复现，先修最早的因果错误、忽略级联 → 分类（语言限制/装饰器/API 可用性/模块导入/资源/Hvigor 配置/原生桥/生成代码）→ 最小语义修复 → 重跑聚焦检查再重建。不熟悉的 `@kit.*` API 用 `devecocli docs search` 或官方文档核对签名。
 
-**依赖与产物**：需要可用的构建工具链；CodeGenie 的 `check_ets_files` 用于加速诊断，devecocli 可选（本地文档检索）。产物：因果诊断、分类、最小改动、聚焦检查与完整构建结果。"旧错误消失但出现更早的新错误"不算完成。
+**依赖与产物**：需要可用的构建工具链；CodeGenie `check_ets_files` 或 devecocli MCP `check` 用于加速诊断，devecocli 也可提供本地文档检索。产物：因果诊断、分类、最小改动、聚焦检查与完整构建结果。"旧错误消失但出现更早的新错误"不算完成。
 
 #### arkts-runtime-fix
 
@@ -475,8 +479,8 @@ Agent 会自动路由到 `harmony-debugger-agent`：初始化项目路径 → �
 ### 7.4 设备与模拟器
 
 - **hdc 连不上真机**：检查 USB 调试授权；多设备时所有命令必须 `-t <设备号>`，Skill 在目标不明确时会先询问而不是随机选一台；
-- **签名后安装报 install sign info inconsistent**：换过签名 key 导致，`devecocli run --uninstall` 或先卸载旧包再装；
-- **模拟器 license / 镜像下载**：`devecocli emulator license accept` 需要交互式终端、镜像下载 30 分钟起——Skill 会把这些命令交给你手动执行，属预期行为；
+- **签名后安装报 install sign info inconsistent**：换过签名 key 导致；确认可以移除旧安装后再显式运行 `devecocli run --uninstall`，Skill 不会自动卸载；
+- **模拟器 license / 镜像下载**：`devecocli emulator license` 需要交互式终端；非交互式 `license accept` 也必须先取得明确授权。镜像下载耗时较长，Skill 不会自动接受协议或失败后盲目重试；
 - **权限弹窗、多数 Kit 在 Previewer 里不工作**：这是平台限制，需用模拟器或真机验证。
 
 ### 7.5 CodeGenie MCP 能力边界
@@ -514,7 +518,7 @@ Skill 有明确边界：不顺手卸载应用、清数据、重启设备；不�
 | 插件版本 | 0.2.0 |
 | CodeGenie MCP | `@deveco-codegenie/mcp@1.1.11`（固定；npm stable，2026-07 评审） |
 | 验证环境 | DevEco Studio 26 / HarmonyOS API 26 Beta1 |
-| 可选 devecocli | `@deveco/deveco-cli`（评审时为 1.0.0，以安装版 `--help` 为准） |
+| 可选 devecocli | `@deveco/deveco-cli@1.3.0`（2026-08-25 验证基线，以安装版 `--help` 为准） |
 | 许可证 | MIT |
 
 ### 来源与许可证
